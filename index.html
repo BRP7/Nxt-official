@@ -289,6 +289,89 @@
     margin: 0 15px 15px;
 }
 
+/* Review Section */
+.review-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.review-heading {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #6A8785;
+}
+
+.review-slider-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.review-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.review-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 10px;
+}
+
+.review-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #646262;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-author {
+    font-size: 16px;
+    font-weight: bold;
+    color: #525a59;
+}
+
+/* Slider Navigation Buttons */
+.review-prev-button,
+.review-next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100; /* Ensure buttons are above other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-prev-button {
+    left: 15px; /* Move inside the container */
+}
+
+.review-next-button {
+    right: 15px; /* Move inside the container */
+}
+
+.review-prev-button:hover,
+.review-next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+
     </style>
 </head>
 <body>
@@ -357,6 +440,38 @@
         </div>
     </section>
     
+    <section class="review-section" id="reviews">
+        <h2 class="review-heading">What Our Clients Say</h2>
+        <div class="review-slider-container">
+            <div class="review-slider">
+                <!-- Review Slide 1 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "NxtSite transformed my ideas into reality! The team was professional, and the process was smooth. I couldn't have asked for a better experience."
+                    </p>
+                    <h4 class="review-author">— Sarah M., Designer</h4>
+                </div>
+                <!-- Review Slide 2 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "The NxtSite team built my corporate website with precision and creativity. Their attention to detail and customer service was outstanding!"
+                    </p>
+                    <h4 class="review-author">— James L., Business Owner</h4>
+                </div>
+                <!-- Review Slide 3 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "I was overwhelmed by the idea of building a website, but NxtSite made it so easy! Their expertise gave me a website I'm proud of."
+                    </p>
+                    <h4 class="review-author">— Emma T., Freelancer</h4>
+                </div>
+            </div>
+            <!-- Slider Navigation -->
+            <button class="review-prev-button">&#10094;</button>
+            <button class="review-next-button">&#10095;</button>
+        </div>
+    </section>
+    
 
     <section class="about-section" id="about">
         <h2 class="about-heading">About Us</h2>
@@ -374,14 +489,39 @@
         /* Scroll-based Blur Effect for Navbar */
         window.addEventListener('scroll', () => {
             let navbar = document.querySelector('.navbar');
+            let navbarBrand = document.querySelector('.navbar-brand');
             if (window.scrollY > 0) {
                 navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.01)'; /* Semi-transparent white */
                 navbar.style.backdropFilter = 'blur(5px)'; /* Apply blur effect */
+                navbarBrand.style.color = '#6A8785';
             } else {
                 navbar.style.backgroundColor = 'transparent'; /* Reset to transparent */
                 navbar.style.backdropFilter = 'none'; /* Remove blur effect */
             }
         });
+
+    const reviewSlider = document.querySelector('.review-slider');
+    const reviewSlides = document.querySelectorAll('.review-slide');
+    const prevReviewButton = document.querySelector('.review-prev-button');
+    const nextReviewButton = document.querySelector('.review-next-button');
+
+    let currentReviewIndex = 0;
+
+    // Move to the next review
+    nextReviewButton.addEventListener('click', () => {
+        if (currentReviewIndex < reviewSlides.length - 1) {
+            currentReviewIndex++;
+            reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+        }
+    });
+
+    // Move to the previous review
+    prevReviewButton.addEventListener('click', () => {
+        if (currentReviewIndex > 0) {
+            currentReviewIndex--;
+            reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+        }
+    });
     </script>
 </body>
 </html>
