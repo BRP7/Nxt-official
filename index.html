@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NxtSite</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* Removed overflow: hidden */
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            position: fixed; /* Sticks the navbar at the top */
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 20px;
+            z-index: 1000; /* Ensure the navbar is above other elements */
+            background-color: transparent; /* No background color initially */
+            transition: background-color 0.3s ease, backdrop-filter 0.3s ease; /* Smooth transition for background and blur effect */
+            height: 70px; /* Fixed height for navbar */
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            color: #000;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+            list-style: none; /* Remove bullets from list */
+            margin: 0; /* Remove any default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .navbar-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 15px;
+        }
+
+        .navbar-links a:last-child {
+            margin-right: 15px; /* Add margin to the last link */
+        }
+
+        .navbar-links a:hover {
+            background-color: #6a8785;
+            border-radius: 5px;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            background: url('image1.png') no-repeat center center;
+            background-size: cover;
+            height: 100vh; /* Full viewport height */
+            width: 100vw;
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            color: #000000;
+            padding-top: 80px; /* Space for the fixed navbar */
+        }
+
+        .hero-container {
+            position: absolute;
+            top: 90px; /* Increase space from the navbar */
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-heading {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subheading {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #646262; /* Light gray text */
+            line-height: 1.6;
+        }
+
+        .subheading-part {
+            display: block; /* Break text into multiple lines */
+            margin-bottom: 10px; /* Add space between parts */
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center; /* Centers the buttons horizontally */
+            gap: 20px;
+        }
+
+        .cta-button {
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .primary {
+            background-color: #6a8785;
+            color: white;
+        }
+
+        .primary:hover {
+            background-color: #5e817e;
+        }
+
+        .secondary {
+            background-color: transparent;
+            border: 2px solid #6a8785;
+            color: #6a8785;
+        }
+
+        .secondary:hover {
+            background-color: #9cb5b3;
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .section-heading {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #000;
+        }
+
+        /* Services Container */
+        .services-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #6a8785;
+        }
+
+        .service-description {
+            font-size: 16px;
+            color: #646262;
+            line-height: 1.6;
+        }
+
+        /* Hover Effect */
+        .service-card:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            background-color: #f1f1f1;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 60px 20px;
+            background-color: #ffffff;
+            text-align: center;
+        }
+
+        .about-heading {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #000;
+        }
+
+        .about-description {
+            font-size: 18px;
+            color: #646262;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: 2px solid #6a8785;
+            color: #6a8785;
+            background-color: transparent;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .contact-button:hover {
+            background-color: #9cb5b3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="#home" class="navbar-brand">NxtSite</a>
+                <ul class="navbar-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="hero-container">
+            <h1 class="hero-heading">Build Your Online Presence, Effortlessly.</h1>
+            <p class="hero-subheading">
+                <span class="subheading-part">We help busy professionals who feel overwhelmed by technology create a strong online presence—without the stress, confusion, or learning curve.</span>
+                <span class="subheading-part"></span>
+            </p>
+            <div class="cta-buttons">
+                <a href="#get-started" class="cta-button primary">Get Started</a>
+                <a href="#learn-more" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <h2 class="section-heading">Our Services</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <h3 class="service-title">Web Design</h3>
+                <p class="service-description">Create visually stunning websites tailored to your brand and needs, with a focus on user experience.</p>
+            </div>
+            <div class="service-card">
+                <h3 class="service-title">Development</h3>
+                <p class="service-description">Custom web development services to bring your ideas to life with robust and scalable solutions.</p>
+            </div>
+            <div class="service-card">
+                <h3 class="service-title">SEO Optimization</h3>
+                <p class="service-description">Improve your website's visibility on search engines with effective SEO strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <h2 class="about-heading">About Us</h2>
+        <p class="about-description">
+            At NxtSite, we are passionate about helping professionals who feel overwhelmed by technology build their online presence. We provide the expertise and support to create a stunning website that works for you, ensuring ease and confidence every step of the way.
+        </p>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-heading">Contact Us</h2>
+        <a href="mailto:nxtsiteofficial@gmail.com" class="contact-button">Get In Touch</a>
+    </section>
+
+    <script>
+        /* Scroll-based Blur Effect for Navbar */
+        window.addEventListener('scroll', () => {
+            let navbar = document.querySelector('.navbar');
+            if (window.scrollY > 0) {
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.01)'; /* Semi-transparent white */
+                navbar.style.backdropFilter = 'blur(5px)'; /* Apply blur effect */
+            } else {
+                navbar.style.backgroundColor = 'transparent'; /* Reset to transparent */
+                navbar.style.backdropFilter = 'none'; /* Remove blur effect */
+            }
+        });
+    </script>
+</body>
+</html>
