@@ -296,6 +296,12 @@
     text-align: center;
 }
 
+.review-card {
+    margin: 16px; /* Adds spacing around the card */
+    padding: 20px; /* Adds internal space within the card */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
 .review-heading {
     font-size: 36px;
     font-weight: bold;
@@ -308,22 +314,24 @@
     max-width: 800px;
     margin: 0 auto;
     overflow: hidden;
+    /* overflow: visible; Ensure the entire card and buttons are shown */
+    /* display: flex; */
 }
+
+
 
 .review-slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .review-slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin: 0 10px;
+    min-width: 100%; /* Full width for each slide */
+    box-sizing: border-box; /* Ensure padding doesn't add extra width */
+    margin: 0; /* Remove any unintended margins */
 }
+
 
 .review-text {
     font-size: 18px;
@@ -500,28 +508,63 @@
             }
         });
 
-    const reviewSlider = document.querySelector('.review-slider');
-    const reviewSlides = document.querySelectorAll('.review-slide');
-    const prevReviewButton = document.querySelector('.review-prev-button');
-    const nextReviewButton = document.querySelector('.review-next-button');
+        const reviewSlider = document.querySelector('.review-slider');
+const reviewSlides = document.querySelectorAll('.review-slide');
+const prevReviewButton = document.querySelector('.review-prev-button');
+const nextReviewButton = document.querySelector('.review-next-button');
 
-    let currentReviewIndex = 0;
+let currentReviewIndex = 0;
+const slideCount = reviewSlides.length;
 
-    // Move to the next review
-    nextReviewButton.addEventListener('click', () => {
-        if (currentReviewIndex < reviewSlides.length - 1) {
-            currentReviewIndex++;
-            reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
-        }
-    });
+// Update slider width for dynamic resizing
+const updateSliderPosition = () => {
+    reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+};
 
-    // Move to the previous review
-    prevReviewButton.addEventListener('click', () => {
-        if (currentReviewIndex > 0) {
-            currentReviewIndex--;
-            reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
-        }
-    });
+// Next review button logic
+nextReviewButton.addEventListener('click', () => {
+    if (currentReviewIndex < slideCount - 1) {
+        currentReviewIndex++;
+        updateSliderPosition();
+    }
+});
+
+// Previous review button logic
+prevReviewButton.addEventListener('click', () => {
+    if (currentReviewIndex > 0) {
+        currentReviewIndex--;
+        updateSliderPosition();
+    }
+});
+
+// Handle window resize (optional for responsiveness)
+window.addEventListener('resize', updateSliderPosition);
+
+
+    // const reviewSlider = document.querySelector('.review-slider');
+    // const reviewSlides = document.querySelectorAll('.review-slide');
+    // const prevReviewButton = document.querySelector('.review-prev-button');
+    // const nextReviewButton = document.querySelector('.review-next-button');
+
+    // let currentReviewIndex = 0;
+
+    // // Move to the next review
+    // nextReviewButton.addEventListener('click', () => {
+    //     if (currentReviewIndex < reviewSlides.length - 1) {
+    //         currentReviewIndex++;
+    //         reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+    //     }
+    // });
+
+    // // Move to the previous review
+    // prevReviewButton.addEventListener('click', () => {
+    //     if (currentReviewIndex > 0) {
+    //         currentReviewIndex--;
+    //         reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
+    //     }
+    // });
+
+    
     </script>
 </body>
 </html>
