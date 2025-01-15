@@ -311,25 +311,42 @@
 
 .review-slider-container {
     position: relative;
-    max-width: 800px;
+    width: 100vw;
+    /* max-width: 800px; */
     margin: 0 auto;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* overflow: visible; Ensure the entire card and buttons are shown */
     /* display: flex; */
 }
 
 
 
-.review-slider {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    box-sizing: border-box; /* Include padding in width calculation */
-}
+/* .review-slider-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+} */
 
+.review-slider {
+    width:50vw;
+    display: flex;
+    gap: 20px; /* Add spacing between the review slides */
+    transition: transform 0.5s ease-in-out;
+    margin: 2vh 0;
+}
 .review-slide {
-    min-width: 100%; /* Full width for each slide */
-    box-sizing: border-box; /* Ensure padding doesn't add extra width */
-    margin: 0; /* Remove any unintended margins */
+    flex: 0 0 100%; /* Each card takes up the full container width */
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 
@@ -351,12 +368,13 @@
 .review-prev-button,
 .review-next-button {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 20%;
+    transform: translateY(-60%);
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 10px 15px;
+    margin: 10px 35px;
     cursor: pointer;
     border-radius: 50%;
     z-index: 100; /* Ensure buttons are above other elements */
@@ -501,7 +519,7 @@
             if (window.scrollY > 0) {
                 navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.01)'; /* Semi-transparent white */
                 navbar.style.backdropFilter = 'blur(5px)'; /* Apply blur effect */
-                navbarBrand.style.color = '#6A8785';
+                navbarBrand.style.color = '#000';
             } else {
                 navbar.style.backgroundColor = 'transparent'; /* Reset to transparent */
                 navbar.style.backdropFilter = 'none'; /* Remove blur effect */
@@ -512,33 +530,46 @@
 const reviewSlides = document.querySelectorAll('.review-slide');
 const prevReviewButton = document.querySelector('.review-prev-button');
 const nextReviewButton = document.querySelector('.review-next-button');
+// const cardWidth = document.querySelector('.review-card').offsetWidth;
+const cardWidth = document.querySelector('.review-slide').offsetWidth;
+
+
 
 let currentReviewIndex = 0;
-const slideCount = reviewSlides.length;
 
-// Update slider width for dynamic resizing
-const updateSliderPosition = () => {
-    reviewSlider.style.transform = `translateX(-${currentReviewIndex * 100}%)`;
-};
-
-// Next review button logic
+// Move to the next review
 nextReviewButton.addEventListener('click', () => {
-    if (currentReviewIndex < slideCount - 1) {
+    if (currentReviewIndex < reviewSlides.length - 1) {
         currentReviewIndex++;
-        updateSliderPosition();
+    } else {
+        currentReviewIndex = 0; // Loop back to the first slide
     }
+    updateReviewSlider();
 });
 
-// Previous review button logic
+// Move to the previous review
 prevReviewButton.addEventListener('click', () => {
     if (currentReviewIndex > 0) {
         currentReviewIndex--;
-        updateSliderPosition();
+    } else {
+        currentReviewIndex = reviewSlides.length - 1; // Loop back to the last slide
     }
+    updateReviewSlider();
 });
 
-// Handle window resize (optional for responsiveness)
-window.addEventListener('resize', updateSliderPosition);
+// function updateReviewSlider() {
+//     const slideWidth = reviewSlides[0].clientWidth;
+//     reviewSlider.style.transform = `translateX(-${currentReviewIndex * slideWidth}px)`;
+// }
+
+const updateReviewSlider = () => {
+    const slideWidth = reviewSlides[0].clientWidth; // Get the width of one slide
+    reviewSlider.style.transform = `translateX(-${currentReviewIndex * slideWidth + 30}px)`; // Move the slider
+};
+
+window.addEventListener('resize', updateReviewSlider); // Adjust on window resize
+
+
 
 
     // const reviewSlider = document.querySelector('.review-slider');
