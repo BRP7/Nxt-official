@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NxtSite</title>
+    <link rel="stylesheet" href="./Style/style.css">
+</head>
+<body>
+    <section class="hero-section">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <a href="#home" class="navbar-brand">NxtSite</a>
+                <ul class="navbar-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="Pages/Login.html">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="hero-container">
+            <h1 class="hero-heading">Build Your Online Presence, Effortlessly.</h1>
+            <p class="hero-subheading">
+                <span class="subheading-part">We help busy professionals who feel overwhelmed by technology create a strong online presence—without the stress, confusion, or learning curve.</span>
+                <span class="subheading-part"></span>
+            </p>
+            <div class="cta-buttons">
+                <a href="#get-started" class="cta-button primary">Get Started</a>
+                <a href="#learn-more" class="cta-button secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <h2 class="section-heading">Our Services</h2>
+        <div class="services-container">
+            <div class="service-card">
+                <h3 class="service-title">Web Design</h3>
+                <p class="service-description">Create visually stunning websites tailored to your brand and needs, with a focus on user experience.</p>
+            </div>
+            <div class="service-card">
+                <h3 class="service-title">Development</h3>
+                <p class="service-description">Custom web development services to bring your ideas to life with robust and scalable solutions.</p>
+            </div>
+            <div class="service-card">
+                <h3 class="service-title">SEO Optimization</h3>
+                <p class="service-description">Improve your website's visibility on search engines with effective SEO strategies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="profile-section" id="profile">
+        <h2 class="profile-heading">Our Work</h2>
+        <div class="profile-container">
+            <div class="project-card">
+                <img src="Public/image1.png" alt="Project 1" class="project-image">
+                <h3 class="project-title">E-Commerce Website</h3>
+                <p class="project-description">A modern, user-friendly platform for online shopping, tailored for a seamless experience.</p>
+            </div>
+            <div class="project-card">
+                <img src="Public/image.png" alt="Project 2" class="project-image">
+                <h3 class="project-title">Portfolio Website</h3>
+                <p class="project-description">A sleek, responsive portfolio website for creatives to showcase their work.</p>
+            </div>
+            <div class="project-card">
+                <img src="Public/image2.png" alt="Project 3" class="project-image">
+                <h3 class="project-title">Corporate Website</h3>
+                <p class="project-description">Professional and intuitive design for a corporate client's online presence.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="review-section" id="reviews">
+        <h2 class="review-heading">What Our Clients Say</h2>
+        <div class="review-slider-container">
+            <div class="review-slider">
+                <!-- Review Slide 1 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "NxtSite transformed my ideas into reality! The team was professional, and the process was smooth. I couldn't have asked for a better experience."
+                    </p>
+                    <h4 class="review-author">— Sarah M., Designer</h4>
+                </div>
+                <!-- Review Slide 2 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "The NxtSite team built my corporate website with precision and creativity. Their attention to detail and customer service was outstanding!"
+                    </p>
+                    <h4 class="review-author">— James L., Business Owner</h4>
+                </div>
+                <!-- Review Slide 3 -->
+                <div class="review-slide">
+                    <p class="review-text">
+                        "I was overwhelmed by the idea of building a website, but NxtSite made it so easy! Their expertise gave me a website I'm proud of."
+                    </p>
+                    <h4 class="review-author">— Emma T., Freelancer</h4>
+                </div>
+            </div>
+            <!-- Slider Navigation -->
+            <button class="review-prev-button">&#10094;</button>
+            <button class="review-next-button">&#10095;</button>
+        </div>
+    </section>
+    
+
+    <section class="about-section" id="about">
+        <h2 class="about-heading">About Us</h2>
+        <p class="about-description">
+            At NxtSite, we are passionate about helping professionals who feel overwhelmed by technology build their online presence. We provide the expertise and support to create a stunning website that works for you, ensuring ease and confidence every step of the way.
+        </p>
+    </section>
+
+    <!-- <section class="contact-section" id="contact">
+        <h2 class="section-heading">Contact Us</h2>
+        <a href="mailto:nxtsiteofficial@gmail.com" class="contact-button">Get In Touch</a>
+    </section> -->
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-heading">Contact Us</h2>
+        <p class="contact-description">Feel free to reach out to us! We'd love to hear from you.</p>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <input type="text" id="name" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="contact-button">Send Message</button>
+        </form>
+        
+      
+        
+    </section>
+    <script src="Js/Script.js"></script>
+</body>
+</html>
