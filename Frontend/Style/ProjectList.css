@@ -1,0 +1,81 @@
+/* General Section Styling */
+.projects-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Section Title */
+.section-heading {
+    font-size: 28px;
+    color: #4a4a4a;
+    margin-bottom: 20px; /* Space below the title */
+    text-align: center;
+}
+
+/* Button Styling */
+.create-new-project-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4a7267; /* Match Contact Page button color */
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    float: right; /* Align the button to the right */
+    margin-top: -20px; /* Adjust position below the title */
+}
+
+.create-new-project-btn:hover {
+    background-color: #36574c;
+}
+
+/* Projects List Styling */
+.projects-container {
+    margin-top: 40px; /* Space between button and project list */
+    text-align: left;
+}
+
+.project-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-bottom: 2px solid #4a7267; /* Green underline */
+}
+.project-name a {
+    text-decoration: none;  /* Remove default underline */
+    color: #4a4a4a;         /* Set text color to black */
+    transition: color 0.3s ease, border-bottom 0.3s ease; /* Smooth transitions */
+}
+
+.project-name a:hover {
+    color: #4a7267;         /* Change text color on hover (greenish shade) */
+    border-bottom: 2px solid #4a7267; /* Add green underline on hover */
+}
+
+
+.project-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 8px;
+}
+
+.project-description {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4vh;
+}
+
+/* Empty Message */
+.empty-message {
+    font-size: 16px;
+    color: #888;
+    margin-top: 20px;
+}
