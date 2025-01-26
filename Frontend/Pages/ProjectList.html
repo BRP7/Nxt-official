@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects List</title>
+    <!-- <link rel="stylesheet" href="../Style/style.css"> Using shared CSS file -->
+     <style>
+        /* Container for projects list */
+.projects-section {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Button Styles (Reuse styles from Contact Page) */
+.primary-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Projects List Styles */
+.list-container {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.list-item {
+    padding: 20px;
+    margin: 15px 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.list-item-heading {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.list-item-heading .link {
+    text-decoration: none;
+    /* color: #007bff; */
+}
+
+.list-item-heading .link:hover {
+    text-decoration: underline;
+}
+
+.list-item-description {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Empty message styling */
+.empty-message {
+    font-size: 16px;
+    color: #888;
+    margin-top: 20px;
+}
+
+     </style>
+</head>
+<body>
+    <section class="projects-section">
+        <div class="container">
+            <a href="./AddProjectForm.html" class="btn primary-btn">Create New Project</a> <!-- Styled like contact page button -->
+            <h2 class="section-heading">Projects List</h2>
+            <div id="projectsList" class="list-container">
+                <!-- Projects will be dynamically added here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/api/projects/projects', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const projects = await response.json();
+                    const projectsListContainer = document.getElementById('projectsList');
+
+                    projectsListContainer.innerHTML = projects.length === 0 
+                        ? '<p class="empty-message">No projects available.</p>'
+                        : projects.map(project => `
+                            <div class="list-item">
+                                <h3 class="list-item-heading">
+                                    <a href="/project-details.html?id=${project._id}" class="link">${project.projectName}</a>
+                                </h3>
+                                <p class="list-item-description">
+                                    ${project.description.length > 50 
+                                        ? project.description.slice(0, 50) + '...' 
+                                        : project.description}
+                                </p>
+                            </div>
+                        `).join('');
+                } else {
+                    alert('Failed to load projects.');
+                }
+            } catch (error) {
+                console.error('Error fetching projects:', error);
+                alert('An error occurred while fetching projects.');
+            }
+        };
+
+        fetchProjects();
+    </script>
+</body>
+</html>
