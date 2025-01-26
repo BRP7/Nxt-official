@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Project</title>
+    <link rel="stylesheet" href="../Style/CreateProject.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+        <div class="form-container">
+        <h2>Create Project</h2>
+        
+        <form id="projectForm">
+            <label for="projectName">Project Name</label>
+            <input type="text" id="projectName" name="projectName" required>
+
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="client">Select Client</label>
+            <select id="client" name="client" required>
+                <!-- Dynamically populated with users -->
+            </select>
+
+            <label for="image">Project Image (Optional)</label>
+            <input type="file" id="image" name="image">
+
+            <label for="status">Project Status</label>
+            <select id="status" name="status" required>
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+            </select>
+
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate">
+
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate">
+
+            <label for="tags" >Tags (Optional)</label>
+            <input type="text" class="tags" id="tags" name="tags">
+
+            <label for="budget" >Budget (Optional)</label>
+            <input type="number" class="tags" id="budget" name="budget">
+
+            <button type="submit">Create Project</button>
+        </form>
+    </div>
+    <script>
+const checkAdminAccess = async () => {
+    // const userId = localStorage.getItem('authToken');
+    // if (!userId) {
+    //     alert('No user found. Please log in.');
+    //     window.location.href = '/login';
+    //     return;
+    // }
+
+    try {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            alert('No token found. Please log in.');
+            window.location.href = './Login.html';
+            return;
+        }
+        // Fetch user details by ID
+        const response = await fetch(`http://localhost:5000/api/auth/users/admin`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        console.log(response);
+
+        if (response.status === 200) {
+            const user = await response.json();
+            if (user.role !== 'admin') {
+                alert('You must be an admin to access this page');
+                window.location.href = '/login';
+            }
+        } else {
+            alert('User not found or unauthorized');
+            window.location.href = './Login';
+        }
+    } catch (error) {
+        console.error('Error checking user role:', error);
+        alert('An error occurred while checking admin access.');
+        // window.location.href = '/login';
+    }
+};
+
+
+const fetchUsers = async () => {
+    try {
+        const response = await fetch('http://localhost:5000/api/auth/users');
+        const users = await response.json();
+
+        const clientSelect = document.getElementById('client');
+        users.forEach(user => {
+            const option = document.createElement('option');
+            option.value = user._id;
+            option.textContent = user.username;
+            clientSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        alert('Failed to fetch users');
+    }
+};
+
+const submitProjectForm = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(document.getElementById('projectForm'));
+    const projectData = {
+        projectName: formData.get('projectName'),
+        description: formData.get('description'),
+        client: formData.get('client'),
+        status: formData.get('status'),
+        startDate: formData.get('startDate'),
+        endDate: formData.get('endDate'),
+        tags: formData.get('tags') ? formData.get('tags').split(',') : [],
+        budget: formData.get('budget'),
+    };
+
+    const image = formData.get('image');
+    if (image) {
+        // Handle image upload if present (can use FormData API or a different method)
+        // Example: Send image to backend and get URL to store in project data
+        // projectData.image = await uploadImage(image); 
+    }
+
+    try {
+        const response = await fetch('http://localhost:5000/api/projects', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(projectData),
+        });
+
+        if (response.ok) {
+            alert('Project created successfully!');
+            window.location.href = '/projects'; // Redirect to the project list or dashboard
+        } else {
+            alert('Failed to create project');
+        }
+    } catch (error) {
+        console.error('Error creating project:', error);
+        alert('An error occurred while creating the project');
+    }
+};
+
+// Initialize
+checkAdminAccess();
+fetchUsers();
+
+document.getElementById('projectForm').addEventListener('submit', submitProjectForm);
+
+    </script>
+</body>
+</html>
